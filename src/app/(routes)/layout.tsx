@@ -10,7 +10,7 @@ export default function PublicLayout({
   return (
     <>
       {/* <Header /> */}
-      <main className="flex-grow">
+      <main >
         {children}
       </main>
       {/* <Footer /> */}
