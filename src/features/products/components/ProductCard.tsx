@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Card, Typography, Tag, Rate, Button, Space } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
-import Link from 'next/link';
-import { Product } from '@/types/product.types';
+import { Card, Typography, Tag, Rate, Button, Space } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import { Product } from "@/features/products/types/product.types";
 
 const { Text, Title } = Typography;
 
@@ -21,12 +21,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <Card
         hoverable
         className="h-full transition-all duration-300 hover:shadow-strong"
-        style={{ 
-          borderRadius: '12px',
-          overflow: 'hidden',
-          borderColor: 'var(--color-gray-200)',
+        style={{
+          borderRadius: "12px",
+          overflow: "hidden",
+          borderColor: "var(--color-gray-200)",
         }}
-        bodyStyle={{ padding: '16px' }}
+        bodyStyle={{ padding: "16px" }}
       >
         <div className="flex flex-col items-center">
           {/* تصویر */}
@@ -38,20 +38,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div 
+              <div
                 className="w-full h-full flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))' }}
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))",
+                }}
               >
                 <span className="text-white text-4xl font-bold">
                   {product.title.charAt(0)}
                 </span>
               </div>
             )}
-            
+
             {/* تخفیف */}
             {discount > 0 && (
-              <Tag 
-                color="red" 
+              <Tag
+                color="red"
                 className="absolute top-2 left-2 text-xs font-bold"
               >
                 {discount}% تخفیف
@@ -60,13 +63,21 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
 
           {/* عنوان */}
-          <Title level={5} className="text-center mb-1" style={{ marginBottom: 4, color: 'var(--color-gray-800)' }}>
+          <Title
+            level={5}
+            className="text-center mb-1"
+            style={{ marginBottom: 4, color: "var(--color-gray-800)" }}
+          >
             {product.title}
           </Title>
 
           {/* برند */}
           {product.brand && (
-            <Text type="secondary" className="text-xs" style={{ color: 'var(--color-gray-500)' }}>
+            <Text
+              type="secondary"
+              className="text-xs"
+              style={{ color: "var(--color-gray-500)" }}
+            >
               {product.brand}
             </Text>
           )}
@@ -77,7 +88,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               disabled
               defaultValue={product.rating}
               className="text-xs mt-1"
-              style={{ fontSize: '14px' }}
+              style={{ fontSize: "14px" }}
             />
           )}
 
@@ -85,15 +96,27 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <div className="mt-2 flex items-center gap-2">
             {discount > 0 ? (
               <>
-                <Text delete className="text-sm" style={{ color: 'var(--color-gray-400)' }}>
+                <Text
+                  delete
+                  className="text-sm"
+                  style={{ color: "var(--color-gray-400)" }}
+                >
                   {product.price.toLocaleString()} تومان
                 </Text>
-                <Text strong className="text-base" style={{ color: 'var(--color-success)' }}>
+                <Text
+                  strong
+                  className="text-base"
+                  style={{ color: "var(--color-success)" }}
+                >
                   {finalPrice.toLocaleString()} تومان
                 </Text>
               </>
             ) : (
-              <Text strong className="text-base" style={{ color: 'var(--color-gray-800)' }}>
+              <Text
+                strong
+                className="text-base"
+                style={{ color: "var(--color-gray-800)" }}
+              >
                 {product.price.toLocaleString()} تومان
               </Text>
             )}
@@ -101,13 +124,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
           {/* دکمه‌ها */}
           <Space className="w-full mt-3" direction="vertical" size={4}>
-            <Tag 
-              color={isInStock ? 'success' : 'error'} 
+            <Tag
+              color={isInStock ? "success" : "error"}
               className="text-xs w-full text-center"
             >
-              {isInStock ? `موجود (${product.stock})` : 'ناموجود'}
+              {isInStock ? `موجود (${product.stock})` : "ناموجود"}
             </Tag>
-            
+
             <Button
               type="primary"
               size="small"

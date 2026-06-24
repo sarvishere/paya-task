@@ -2,12 +2,19 @@ import type { Metadata } from 'next';
 import { Vazirmatn } from 'next/font/google';
 import '@/styles/global.css';
 import 'antd/dist/reset.css';
+import Providers from './providers';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 const vazirmatn = Vazirmatn({
   subsets: ['arabic'],
   display: 'swap',
   variable: '--font-vazirmatn',
 });
+
+export const metadata: Metadata = {
+  title: 'فروشگاه من',
+  description: 'بهترین محصولات با بهترین قیمت',
+};
 
 
 export default function RootLayout({
@@ -16,12 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" className={vazirmatn.variable}>
-      <body>
-        {/* <ThemeProvider> */}
-            {children}
-            {/* <Toaster />
-        </ThemeProvider> */}
+    <html lang="fa" dir="rtl">
+      <body className={vazirmatn.variable}>
+        <AntdRegistry>
+          <Providers>
+            <main className="container mx-auto px-4 py-8">
+              {children}
+            </main>
+          </Providers>
+        </AntdRegistry>
       </body>
     </html>
   );
