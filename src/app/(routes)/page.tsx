@@ -20,7 +20,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
+    <div className="min-h-screen p-6 ">
       <div className="max-w-7xl mx-auto">
         <ProductGrid
           products={data?.products || []}

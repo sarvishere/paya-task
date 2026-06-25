@@ -1,6 +1,4 @@
-// import { Header } from '@/components/layout/Header/Header';
-// import { Footer } from '@/components/layout/Footer/Footer';
-// import { Container } from '@/components/ui/Container/Container';
+import Header from "@/features/header/components/HeaderSearch";
 
 export default function PublicLayout({
   children,
@@ -9,11 +7,10 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <main >
         {children}
       </main>
-      {/* <Footer /> */}
     </>
   );
 }

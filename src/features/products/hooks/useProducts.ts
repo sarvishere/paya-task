@@ -1,9 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getProducts } from '../api/productsApi';
-import { ProductsResponse } from '../types/product.types';
 import { keepPreviousData } from '@tanstack/react-query'
+import { getProducts } from '@/shared/config/apis/productsApi';
+import { ProductsResponse } from '@/shared/types/product.types';
 
 export const useProducts = (page: number = 1, limit: number = 9) => {
   return useQuery<ProductsResponse>({
