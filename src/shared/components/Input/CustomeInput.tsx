@@ -25,6 +25,7 @@ const CustomInput = forwardRef<InputRef, InputProps>(
     },
     ref
   ) => {
+
     const globalClasses = useMemo(
       () => getClasses({ variant, size, status, disabled, fullWidth }),
       [variant, size, status, disabled, fullWidth]
