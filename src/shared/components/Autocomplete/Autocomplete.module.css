@@ -74,7 +74,6 @@
   font-weight: 500 !important;
 }
 
-/* استایل‌های سایز */
 .autocomplete.small :global(.ant-input) {
   height: 32px !important;
   font-size: 12px !important;
@@ -85,7 +84,6 @@
   font-size: 16px !important;
 }
 
-/* واریانت‌ها */
 .autocomplete.filled :global(.ant-input) {
   background-color: #f3f4f6 !important;
 }

@@ -196,20 +196,6 @@ function Autocomplete<T = unknown>({
           allowClear={false}
           onClear={handleClear}
           popupRender={renderPopup}
-          styles={{
-            popup: {
-              root: {
-                maxHeight: maxHeight,
-                overflow: 'auto',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                padding: '4px',
-                width: '100%',
-                minWidth: '100%',
-                zIndex: 9999,
-              },
-            },
-          }}
           showSearch={{
             onSearch: handleChange,
           }}
@@ -219,7 +205,7 @@ function Autocomplete<T = unknown>({
             placeholder={placeholder}
             disabled={externalLoading || disabled}
             className={cn(
-              '!border-0 !shadow-none !bg-transparent focus:!ring-0',
+              '!shadow-none !bg-transparent focus:!ring-0',
               inputClassName
             )}
             suffix={suffixIcon}
