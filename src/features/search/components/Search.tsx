@@ -7,11 +7,11 @@ import { useProductSearch } from "../hooks/useProductSearch";
 import Autocomplete from "@/shared/components/Autocomplete";
 import { Avatar } from "antd";
 
-interface HeaderSearchProps {
+interface SearchProps {
   className?: string;
 }
 
-export default function HeaderSearch({ className = "" }: HeaderSearchProps) {
+export function Search({ className = "" }: SearchProps) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -86,7 +86,7 @@ export default function HeaderSearch({ className = "" }: HeaderSearchProps) {
 
   return (
     <div className={className}>
-      <div className="min-h-25 border-b border-gray-200 p-8">
+      <div className="min-h-25">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
             جستجوی محصولات

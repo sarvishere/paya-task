@@ -3,7 +3,8 @@
 import { Card, Typography, Tag, Rate, Button, Space } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import { Product } from "@/features/products/types/product.types";
+import { Product } from "@/shared/types/product.types";
+
 
 const { Text, Title } = Typography;
 

@@ -54,7 +54,6 @@ const CustomButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || loading}
         loading={loading}
         icon={icon}
-        type={type as any}
         htmlType={htmlType}
         {...restProps}
       >

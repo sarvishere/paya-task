@@ -1,4 +1,4 @@
-import Header from "@/features/header/components/HeaderSearch";
+import Header from "@/features/search/components/MainSection";
 
 export default function PublicLayout({
   children,
@@ -7,10 +7,7 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <Header />
-      <main >
-        {children}
-      </main>
+      <main>{children}</main>
     </>
   );
 }

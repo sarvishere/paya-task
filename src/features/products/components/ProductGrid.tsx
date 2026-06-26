@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { Row, Col, Empty, Pagination } from "antd";
-import { Product , ProductGridProps } from "@/features/products/types/product.types";
+
 import styles from "./ProductGrid.module.css";
 import { ProductSkeleton } from "./ProductSkeleton";
 import { ProductCard } from "./ProductCard";
+import { ProductGridProps } from "@/shared/types/product.types";
 
 
 export const ProductGrid = ({

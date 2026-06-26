@@ -1,4 +1,3 @@
-// components/products/ProductSkeleton.tsx
 'use client';
 
 import { Card, Skeleton } from 'antd';
@@ -7,8 +6,6 @@ export const ProductSkeleton = () => {
   return (
     <Card
       className="h-full"
-      style={{ borderRadius: '12px' }}
-      bodyStyle={{ padding: '16px' }}
     >
       <div className="flex flex-col items-center">
         <Skeleton.Image 
