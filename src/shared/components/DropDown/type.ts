@@ -5,7 +5,7 @@ export interface DropdownOption {
 }
 
 export interface DropdownProps {
-  options: Array<{ label: string; value: string }>;
+  options: DropdownOption[];
   value?: string | null;
   onChange?: (value: string | null) => void;
   placeholder?: string;

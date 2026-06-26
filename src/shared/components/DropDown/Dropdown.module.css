@@ -1,206 +1,75 @@
+/* Dropdown.module.css - فقط استایل‌های ساختاری و آیکون‌ها */
+
 .container {
   position: relative;
   width: 100%;
-}
-
-.dropdown {
-  position: absolute;
-  z-index: 50;
-  width: 100%;
-  margin-top: 4px;
-  background-color: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  max-height: 240px;
-  overflow: auto;
-}
-
-.dropdown.default {
-  background-color: white;
-  border-color: #e5e7eb;
-}
-
-.dropdown.filled {
-  background-color: #f3f4f6;
-  border-color: transparent;
-}
-
-.dropdown.outline {
-  background-color: transparent;
-  border-color: #d1d5db;
-}
-
-.dropdown.ghost {
-  background-color: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.dropdown.sm {
-  max-height: 180px;
-}
-
-.dropdown.md {
-  max-height: 240px;
-}
-
-.dropdown.lg {
-  max-height: 300px;
-}
-
-.dropdownList {
-  padding: 4px 0;
-  margin: 0;
-  list-style: none;
-}
-
-.dropdownItem {
-  padding: 10px 16px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #374151;
-  transition: all 0.15s;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.dropdown.default .dropdownItem:hover {
-  background-color: #eff6ff;
-}
-
-.dropdown.filled .dropdownItem:hover {
-  background-color: #e5e7eb;
-}
-
-.dropdown.outline .dropdownItem:hover {
-  background-color: #f9fafb;
-}
-
-.dropdown.ghost .dropdownItem:hover {
-  background-color: #f3f4f6;
-}
-
-.dropdown.sm .dropdownItem {
-  padding: 6px 12px;
-  font-size: 12px;
-}
-
-.dropdown.md .dropdownItem {
-  padding: 10px 16px;
+.label {
+  display: block;
   font-size: 14px;
-}
-
-.dropdown.lg .dropdownItem {
-  padding: 14px 20px;
-  font-size: 16px;
-}
-
-.dropdownItemSelected {
-  background-color: #dbeafe;
-  color: #1d4ed8;
   font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 4px;
 }
 
-.dropdownItemSelected:hover {
-  background-color: #bfdbfe;
-}
-
-.dropdown.error .dropdownItemSelected {
-  background-color: #fee2e2;
-  color: #dc2626;
-}
-
-.dropdown.error .dropdownItemSelected:hover {
-  background-color: #fecaca;
-}
-
-.dropdown.error .checkMark {
-  color: #dc2626;
-}
-
-.dropdown.error .dropdownItem:hover {
-  background-color: #fef2f2;
-}
-
-.dropdown.success .dropdownItemSelected {
-  background-color: #d1fae5;
-  color: #059669;
-}
-
-.dropdown.success .dropdownItemSelected:hover {
-  background-color: #a7f3d0;
-}
-
-.dropdown.success .checkMark {
-  color: #059669;
-}
-
-.dropdown.success .dropdownItem:hover {
-  background-color: #ecfdf5;
-}
-
-.dropdown.warning .dropdownItemSelected {
-  background-color: #fef3c7;
-  color: #d97706;
-}
-
-.dropdown.warning .dropdownItemSelected:hover {
-  background-color: #fde68a;
-}
-
-.dropdown.warning .checkMark {
-  color: #d97706;
-}
-
-.dropdown.warning .dropdownItem:hover {
-  background-color: #fffbeb;
-}
-
-.checkMark {
-  color: #2563eb;
-  font-size: 12px;
-}
-
-.emptyText {
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.loadingText {
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.w-full {
+.select {
   width: 100%;
 }
 
-.dropdown::-webkit-scrollbar {
-  width: 6px;
+/* استایل‌های آیکون‌ها */
+.suffixWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.dropdown::-webkit-scrollbar-track {
-  background: #f3f4f6;
+.clearIcon {
+  font-size: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.clearIcon:hover {
+  color: #6b7280;
+  background-color: #f3f4f6;
+}
+
+.arrowIcon {
+  font-size: 12px;
+  color: #9ca3af;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* چرخش فلش در حالت باز */
+.select :global(.ant-select-open) .arrowIcon {
+  transform: rotate(180deg);
+}
+
+/* استایل‌های dropdown پاپ‌آپ */
+.select :global(.ant-select-dropdown) {
   border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 4px;
 }
 
-.dropdown::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 8px;
+.select :global(.ant-select-item-option-selected) {
+  background-color: #e5e7eb !important;
 }
 
-.dropdown::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+.select :global(.ant-select-item-option-active) {
+  background-color: #f3f4f6 !important;
+}
+
+/* RTL پشتیبانی */
+.select :global(.ant-select-rtl) .suffixWrapper {
+  direction: rtl;
 }

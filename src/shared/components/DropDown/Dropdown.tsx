@@ -1,13 +1,33 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
-import { InputRef } from 'antd';
-import { DownOutlined, UpOutlined, CloseOutlined } from '@ant-design/icons';
-import { DropdownProps } from './type';
+import { useCallback, useRef, useMemo } from 'react';
+import { Select, Spin } from 'antd';
+import { SelectProps } from 'antd/es/select';
+import { DownOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './Dropdown.module.css';
-import Input from '../Input';
 import { getClasses } from '@/utils/getClasses';
 
+interface DropdownOption {
+  label: string;
+  value: string;
+}
+
+interface DropdownProps {
+  options: DropdownOption[];
+  value?: string | null;
+  onChange?: (value: string | null) => void;
+  placeholder?: string;
+  label?: string;
+  className?: string;
+  disabled?: boolean;
+  allowClear?: boolean;
+  loading?: boolean;
+  emptyText?: string;
+  variant?: 'default' | 'filled' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  status?: 'default' | 'error' | 'success' | 'warning';
+  fullWidth?: boolean;
+}
 
 export default function Dropdown({
   options,
@@ -25,160 +45,116 @@ export default function Dropdown({
   status = 'default',
   fullWidth = false,
 }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<InputRef>(null);
 
-  const filteredOptions = options.filter((opt) =>
-    opt.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    opt.value.toLowerCase().includes(searchTerm.toLowerCase())
+  const selectOptions = useMemo(
+    () => options.map((opt) => ({
+      label: opt.label,
+      value: opt.value,
+    })),
+    [options]
   );
 
-  const selectedOption = options.find((opt) => opt.value === value);
-
-  const inputClasses = getClasses({
-    variant,
-    size,
-    status,
-    disabled,
-    fullWidth,
-  });
-
-  const dropdownClasses = getClasses({
-    variant,
-    size,
-    status,
-    disabled,
-    fullWidth,
-  });
-
-  const handleSelect = useCallback(
-    (selectedValue: string) => {
-      if (value === selectedValue) {
-        onChange?.(null);
-        setSearchTerm('');
+  const handleChange = useCallback(
+    (selectedValue: string | string[]) => {
+      if (Array.isArray(selectedValue)) {
+        onChange?.(selectedValue[0] || null);
       } else {
-        onChange?.(selectedValue);
-        const selected = options.find((o) => o.value === selectedValue);
-        setSearchTerm(selected?.label || '');
+        onChange?.(selectedValue || null);
       }
-      setIsOpen(false);
-      inputRef.current?.blur();
     },
-    [value, onChange, options]
+    [onChange]
   );
 
-  const handleClear = useCallback(() => {
-    onChange?.(null);
-    setSearchTerm('');
-    setIsOpen(false);
-    inputRef.current?.focus();
-  }, [onChange]);
-
-  const toggleDropdown = useCallback((e?: React.MouseEvent) => {
-    e?.stopPropagation(); 
-    if (!disabled) {
-      setIsOpen((prev) => !prev);
-      if (!isOpen) {
-        setTimeout(() => inputRef.current?.focus(), 100);
-      }
+  const getSize = (): SelectProps['size'] => {
+    switch (size) {
+      case 'sm':
+        return 'small';
+      case 'lg':
+        return 'large';
+      default:
+        return 'middle';
     }
-  }, [isOpen, disabled]);
+  };
 
-  const handleFocus = useCallback(() => {
-    if (options.length > 0 && !disabled) {
-      setIsOpen(true);
+  const getStatus = (): SelectProps['status'] => {
+    switch (status) {
+      case 'error':
+        return 'error';
+      case 'warning':
+        return 'warning';
+      default:
+        return undefined;
     }
-  }, [options.length, disabled]);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const getAntdVariant = (): 'outlined' | 'filled' | 'borderless' => {
+    switch (variant) {
+      case 'filled':
+        return 'filled';
+      case 'outline':
+        return 'outlined';
+      case 'ghost':
+        return 'borderless';
+      default:
+        return 'outlined';
+    }
+  };
+
+  const selectClasses = getClasses({
+    variant,
+    size,
+    status,
+    disabled,
+    fullWidth,
+  });
+
+  const suffixIcon = (
+    <div className={styles.suffixWrapper}>
+      {allowClear && value && (
+        <CloseOutlined 
+          className={styles.clearIcon}
+          onClick={(e) => {
+            e.stopPropagation();
+            onChange?.(null);
+          }}
+        />
+      )}
+      <DownOutlined className={styles.arrowIcon} />
+    </div>
+  );
 
   return (
-    <div ref={containerRef} className={`${styles.container} ${className}`}>
-      <Input
-        ref={inputRef}
-        label={label}
-        placeholder={placeholder}
-        value={searchTerm || selectedOption?.label || ''}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-          if (!isOpen) setIsOpen(true);
-        }}
-        onFocus={handleFocus}
-        onKeyDown={(e) => {
-          if (e.key === 'Escape') {
-            setIsOpen(false);
-            inputRef.current?.blur();
-          }
-          if (e.key === 'Enter' && filteredOptions.length === 1) {
-            handleSelect(filteredOptions[0].value);
-          }
-        }}
-        disabled={disabled}
-        suffix={
-          <div className="flex items-center gap-1">
-            {allowClear && value && (
-              <CloseOutlined
-                className="cursor-pointer text-gray-400 hover:text-gray-600 text-sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleClear();
-                }}
-              />
-            )}
-            <span
-              className={`cursor-pointer text-gray-400 hover:text-gray-600 transition-colors ${
-                disabled ? 'cursor-not-allowed opacity-50' : ''
-              }`}
-              onClick={toggleDropdown} 
-              onMouseDown={(e) => e.preventDefault()} 
-            >
-              {isOpen ? <UpOutlined /> : <DownOutlined />}
-            </span>
-          </div>
-        }
-        fullWidth={fullWidth}
-        className={`${inputClasses} w-full`}
-      />
-
-      {isOpen && !disabled && (
-        <div className={`${styles.dropdown} ${dropdownClasses}`}>
-          {loading ? (
-            <div className={styles.loadingText}>در حال بارگذاری...</div>
-          ) : filteredOptions.length === 0 ? (
-            <div className={styles.emptyText}>{emptyText}</div>
-          ) : (
-            <ul className={styles.dropdownList}>
-              {filteredOptions.map((option) => {
-                const isSelected = value === option.value;
-                return (
-                  <li
-                    key={option.value}
-                    onClick={() => handleSelect(option.value)}
-                    className={`${styles.dropdownItem} ${
-                      isSelected ? styles.dropdownItemSelected : ''
-                    }`}
-                  >
-                    <span>{option.label}</span>
-                    {isSelected && (
-                      <span className={styles.checkMark}>✓</span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
+    <div 
+      ref={containerRef} 
+      className={`${styles.container} ${className}`}
+    >
+      {label && (
+        <label className={styles.label}>
+          {label}
+        </label>
       )}
+      
+      <Select
+        className={`${styles.select} ${selectClasses}`}
+        placeholder={placeholder}
+        value={value || undefined}
+        onChange={handleChange}
+        disabled={disabled}
+        loading={loading}
+        allowClear={false}
+        size={getSize()}
+        status={getStatus()}
+        options={selectOptions}
+        showSearch
+        notFoundContent={loading ? <Spin size="small" /> : emptyText}
+        variant={getAntdVariant()}
+        suffixIcon={suffixIcon}
+        getPopupContainer={(triggerNode) => triggerNode.parentNode as HTMLElement}
+        {...(variant === 'ghost' && {
+          bordered: false,
+        })}
+      />
     </div>
   );
 }
