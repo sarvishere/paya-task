@@ -28,7 +28,6 @@ function SearchResults<T = unknown>({
   maxHeight = 400,
 }: SearchResultsProps<T>) {
 
-  console.log("isLoading" , isLoading)
   if (!show) return null;
 
   const containerClasses = cn(

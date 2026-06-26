@@ -109,13 +109,10 @@ export default function HeaderSearch({ className = "" }: HeaderSearchProps) {
             status={error ? "error" : "default"}
             disabled={isLoading}
             fullWidth={true}
-            
             className="w-full"
             inputClassName="!text-base !py-3"
-
             renderItem={renderProductItem}
             getItemKey={getProductKey}
-            
             emptyText="محصولی یافت نشد"
             loadingText="در حال جستجوی محصولات..."
             errorText="خطا در جستجوی محصولات"
