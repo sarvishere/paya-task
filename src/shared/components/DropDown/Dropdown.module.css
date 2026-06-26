@@ -1,5 +1,3 @@
-/* Dropdown.module.css - فقط استایل‌های ساختاری و آیکون‌ها */
-
 .container {
   position: relative;
   width: 100%;
@@ -20,7 +18,6 @@
   width: 100%;
 }
 
-/* استایل‌های آیکون‌ها */
 .suffixWrapper {
   display: flex;
   align-items: center;
@@ -49,12 +46,10 @@
   padding: 4px;
 }
 
-/* چرخش فلش در حالت باز */
 .select :global(.ant-select-open) .arrowIcon {
   transform: rotate(180deg);
 }
 
-/* استایل‌های dropdown پاپ‌آپ */
 .select :global(.ant-select-dropdown) {
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -69,7 +64,6 @@
   background-color: #f3f4f6 !important;
 }
 
-/* RTL پشتیبانی */
 .select :global(.ant-select-rtl) .suffixWrapper {
   direction: rtl;
 }

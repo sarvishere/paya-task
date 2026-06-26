@@ -5,6 +5,7 @@ import { Input as AntdInput, InputRef } from 'antd';
 import { getClasses } from '@/utils/getClasses';
 import styles from './Input.module.css';
 import { InputProps } from './type';
+import { loadingSuffix } from '../common/common';
 
 const CustomInput = forwardRef<InputRef, InputProps>(  
   (
@@ -18,6 +19,8 @@ const CustomInput = forwardRef<InputRef, InputProps>(
       label,
       suffix,
       prefix,
+      loading = false,
+      error = null,
       onChange,
       onFocus,
       onBlur,
@@ -49,6 +52,13 @@ const CustomInput = forwardRef<InputRef, InputProps>(
       [onBlur]
     );
 
+    const finalSuffix = (
+      <div className="flex items-center gap-1">
+        {loadingSuffix(loading)}
+        {suffix}
+      </div>
+    );
+
     return (
       <div className="flex flex-col gap-1 w-full">
         {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
@@ -56,14 +66,17 @@ const CustomInput = forwardRef<InputRef, InputProps>(
           {...restProps}
           ref={ref}  
           className={inputClasses}
-          disabled={disabled}
-          status={status === 'default' ? undefined : status}
-          suffix={suffix}
+          disabled={disabled || loading}
+          status={error ? 'error' : status === 'default' ? undefined : status}
+          suffix={finalSuffix}
           prefix={prefix}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
+        {error && (
+          <span className="text-xs text-red-500 mt-1">{error}</span>
+        )}
       </div>
     );
   }

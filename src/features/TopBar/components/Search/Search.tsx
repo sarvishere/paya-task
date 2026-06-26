@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "@/shared/types/product.types";
 import { useProductSearch } from "./hooks/useProductSearch";
-import Autocomplete from "@/shared/components/Autocomplete";
+
 import { renderProductItem } from "./renderProductItem";
+import Autocomplete from "@/shared/components/Autocomplete";
 
 interface SearchProps {
   className?: string;

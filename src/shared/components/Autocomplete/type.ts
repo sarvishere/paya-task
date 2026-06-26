@@ -1,50 +1,31 @@
-import { BaseComponentProps } from '@/shared/types/style';
+import { ReactNode } from 'react';
 
-export interface SearchResultsProps<T = unknown> {
-  show: boolean;
-  searchTerm: string;
-  isLoading: boolean;
-  error: string | null;
-  results: T[];
-  totalResults: number;
-  maxResults: number;
-  onResultClick: (item: T) => void;
-  onShowAll?: () => void;
-  renderItem?: (item: T, index: number) => React.ReactNode;
-  getItemKey?: (item: T, index: number) => string | number;
-  className?: string;
-  
-  emptyText?: string;
-  loadingText?: string;
-  errorText?: string;
-  showHeader?: boolean;
-  showCount?: boolean;
-  maxHeight?: number;
-}
-
-export interface AutocompleteProps<T = unknown> 
-  extends Pick<BaseComponentProps, 'variant' | 'size' | 'status' | 'disabled' | 'fullWidth' | 'className'> {
+export interface AutocompleteProps<T = unknown> {
   placeholder?: string;
   debounceDelay?: number;
   minChars?: number;
-  maxResults?: number;
   onSearch?: (term: string) => void;
   onResultClick?: (item: T) => void;
   onSearchSubmit?: (term: string) => void;
   loading?: boolean;
   results?: T[];
   totalResults?: number;
+  maxResults?: number;
   error?: string | null;
-  
+  variant?: 'default' | 'filled' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  status?: 'default' | 'error' | 'warning' | 'success';
+  disabled?: boolean;
+  fullWidth?: boolean;
+  className?: string;
+  inputClassName?: string;
+  renderItem?: (item: T, index: number) => ReactNode;
+  getItemKey?: (item: T, index: number) => string | number;
   emptyText?: string;
   loadingText?: string;
   errorText?: string;
+  maxHeight?: number;
+  allowClear?: boolean;
   showHeader?: boolean;
   showCount?: boolean;
-  maxHeight?: number;
-  
-  inputClassName?: string;
-  resultsClassName?: string;
-  renderItem?: (item: T, index: number) => React.ReactNode;
-  getItemKey?: (item: T, index: number) => string | number;
 }

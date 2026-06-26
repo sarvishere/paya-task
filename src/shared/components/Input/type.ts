@@ -20,4 +20,6 @@ export interface InputProps extends BaseComponentProps {
   showCount?: boolean;
   autoFocus?: boolean;
   readOnly?: boolean;
+  loading : boolean;
+  error?: string | null;
 }
