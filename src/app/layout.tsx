@@ -12,7 +12,7 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: "فروشگاه من",
+  title: "فروشگاه سرو",
   description: "بهترین محصولات با بهترین قیمت",
 };
 

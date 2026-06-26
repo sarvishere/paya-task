@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PublicLayout({
   children,
 }: {
@@ -5,6 +7,10 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <header style={{ padding: 16 }}>
+        <Link href="/">صفحه اصلی</Link>
+      </header>
+
       <main>{children}</main>
     </>
   );
