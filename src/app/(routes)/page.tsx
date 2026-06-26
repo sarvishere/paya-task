@@ -28,7 +28,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* TopBar */}
       <TopBar
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
@@ -36,7 +35,6 @@ export default function HomePage() {
         error={error}
       />
 
-      {/* ProductGrid */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 pb-6">
         <ProductGrid
           products={data?.products || []}

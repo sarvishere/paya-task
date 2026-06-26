@@ -1,5 +1,3 @@
-import Header from "@/features/search/components/MainSection";
-
 export default function PublicLayout({
   children,
 }: {
