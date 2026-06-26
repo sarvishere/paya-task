@@ -9,6 +9,7 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
+  discountPercentage:number;
 }
 
 export interface ProductsResponse {

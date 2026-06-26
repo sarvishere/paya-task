@@ -1,9 +1,10 @@
 "use client";
 
-import { Card, Typography, Tag, Rate, Button, Space } from "antd";
+import { Card, Typography, Tag, Rate } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Product } from "@/shared/types/product.types";
+import Button from "@/shared/components/Button";
 
 
 const { Text, Title } = Typography;
@@ -21,16 +22,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     <Link href={`/products/${product.id}`}>
       <Card
         hoverable
-        className="h-full transition-all duration-300 hover:shadow-strong"
-        style={{
-          borderRadius: "12px",
-          overflow: "hidden",
-          borderColor: "var(--color-gray-200)",
-        }}
-        bodyStyle={{ padding: "16px" }}
-      >
+        className="h-full transition-all duration-300 hover:shadow-strong rounded-lg overflow-hidden border-gray-200">
         <div className="flex flex-col items-center">
-          {/* تصویر */}
           <div className="relative w-full h-40 rounded-lg mb-3 overflow-hidden bg-gray-100">
             {product.thumbnail ? (
               <img
@@ -52,7 +45,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               </div>
             )}
 
-            {/* تخفیف */}
             {discount > 0 && (
               <Tag
                 color="red"
@@ -63,7 +55,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             )}
           </div>
 
-          {/* عنوان */}
           <Title
             level={5}
             className="text-center mb-1"
@@ -72,7 +63,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             {product.title}
           </Title>
 
-          {/* برند */}
           {product.brand && (
             <Text
               type="secondary"
@@ -83,7 +73,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </Text>
           )}
 
-          {/* امتیاز */}
           {product.rating && (
             <Rate
               disabled
@@ -93,7 +82,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             />
           )}
 
-          {/* قیمت */}
           <div className="mt-2 flex items-center gap-2">
             {discount > 0 ? (
               <>
@@ -123,8 +111,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             )}
           </div>
 
-          {/* دکمه‌ها */}
-          <Space className="w-full mt-3" direction="vertical" size={4}>
+          <div className="w-full mt-3 flex flex-col gap-2">
             <Tag
               color={isInStock ? "success" : "error"}
               className="text-xs w-full text-center"
@@ -133,16 +120,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </Tag>
 
             <Button
-              type="primary"
-              size="small"
               icon={<ShoppingCartOutlined />}
-              disabled={!isInStock}
+              disabled={true}
               className="w-full"
               onClick={(e) => e.preventDefault()}
             >
               افزودن به سبد خرید
             </Button>
-          </Space>
+          </div>
         </div>
       </Card>
     </Link>

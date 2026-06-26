@@ -201,7 +201,7 @@ function Autocomplete<T = unknown>({
           }}
         >
           <Input
-            ref={inputRef}
+            // ref={inputRef}
             placeholder={placeholder}
             disabled={externalLoading || disabled}
             className={cn(
