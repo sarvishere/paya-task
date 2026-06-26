@@ -1,6 +1,6 @@
 import { unstable_cache } from 'next/cache';
 import { api } from '../axiosConfig';
-import { ProductsResponse } from '../../types/product.types';
+import { Product, ProductsResponse } from '../../types/product.types';
 
 export interface Category {
   slug: string;
@@ -66,5 +66,17 @@ export const getProducts = unstable_cache(
   {
     revalidate: 60, 
     tags: ['products'],
+  }
+);
+
+export const getProduct = unstable_cache(
+  async (id: string): Promise<Product> => {
+    const response = await api.get<Product>(`/products/${id}`);
+    return response.data;
+  },
+  ['products', 'detail'],
+  {
+    revalidate: 60, 
+    tags: ['products', 'detail'],
   }
 );

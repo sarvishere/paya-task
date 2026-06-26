@@ -1,6 +1,5 @@
 import { cache } from 'react';
 import {api} from '@/shared/config/axiosConfig';
-import { ApiResponse } from '@/shared/types/common';
 
 export const cachedApiCall = cache(async <T>(
   url: string,

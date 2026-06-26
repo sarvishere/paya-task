@@ -1,17 +1,15 @@
-interface Props {
-  params: Promise<{ id: string }>
-}
+'use client';
 
-export default async function ProductPage({ params }: Props) {
-  const { id } = await params;
-  
-  // حالا محصول رو با این id از دیتابیس یا API بگیر
-//   const product = await getProduct(id);
+import { useParams } from 'next/navigation';
+import ProductDetailClient from '@/features/productDetails/component/ProductDetail';
+
+export default function ProductPage() {
+  const params = useParams();
+  const id = params.id as string;
 
   return (
-    <div>
-      <h1>محصول {id}</h1>
-      {/* <p>{product?.name}</p> */}
+    <div className="container mx-auto px-4 py-8">
+      <ProductDetailClient productId={id} />
     </div>
   );
 }
