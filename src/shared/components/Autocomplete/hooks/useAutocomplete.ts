@@ -65,15 +65,17 @@ export function useAutocomplete<T = unknown>({
     inputRef.current?.focus();
   }, [onSearch]);
 
-  const handleResultClick = useCallback(
-    (item: T) => {
-      onResultClick?.(item);
-      setSearchTerm('');
-      setManualOpen(false);
-      inputRef.current?.blur();
-    },
-    [onResultClick]
-  );
+const handleResultClick = useCallback(
+  (item: T) => {
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current);
+    }
+    setSearchTerm('');
+    setManualOpen(false);
+    onResultClick?.(item);
+  },
+  [onResultClick]
+);
 
   const handleSearchSubmit = useCallback(() => {
     if (searchTerm.trim()) {

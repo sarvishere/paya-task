@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "@/shared/types/product.types";
 import { useProductSearch } from "./hooks/useProductSearch";
@@ -24,12 +24,13 @@ export function Search({ className = "", value, onChange }: SearchProps) {
     setSearchTerm(term);
   };
 
-  const handleResultClick = (product: Product) => {
+const handleResultClick = (product: Product) => {
+  setSearchTerm("");
+  onChange?.("");
+  startTransition(() => {
     router.push(`/products/${product.id}`);
-    setSearchTerm("");
-    onChange?.("");
-  };
-
+  });
+};
   const handleSearchSubmit = (term: string) => {
     if (term.trim()) {
       onChange?.(term);
