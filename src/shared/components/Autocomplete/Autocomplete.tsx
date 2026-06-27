@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useRef, ReactNode, useCallback, useMemo } from 'react';
-import { AutoComplete, Spin, ConfigProvider, Input } from 'antd';
+import { AutoComplete, Spin, ConfigProvider } from 'antd';
 import { SearchOutlined, LoadingOutlined, CloseOutlined } from '@ant-design/icons';
 import type { BaseOptionType } from 'antd/es/select';
 import { cn } from '@/utils/cn';
 import { AutocompleteProps } from './type';
 import { useAutocomplete } from './hooks/useAutocomplete';
 import styles from './Autocomplete.module.css';
+import Input from '../Input';
 
 interface OptionType extends BaseOptionType {
   key: string;
@@ -75,7 +76,6 @@ function Autocomplete<T = unknown>({
     getItemKey,
   });
 
-  // سافیکس مثل دراپ‌دان
   const suffixIcon = (
     <div className={styles.suffixWrapper}>
       {allowClear && searchTerm && (
@@ -201,7 +201,7 @@ function Autocomplete<T = unknown>({
           }}
         >
           <Input
-            // ref={inputRef}
+            loading={externalLoading}
             placeholder={placeholder}
             disabled={externalLoading || disabled}
             className={cn(

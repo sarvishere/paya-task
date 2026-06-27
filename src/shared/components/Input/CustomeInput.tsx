@@ -1,13 +1,13 @@
 'use client';
 
 import { forwardRef, memo, useMemo, useCallback } from 'react';
-import { Input as AntdInput, InputRef } from 'antd'; 
+import { Input as AntdInput, InputRef, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { getClasses } from '@/utils/getClasses';
 import styles from './Input.module.css';
 import { InputProps } from './type';
-import { loadingSuffix } from '../common/common';
 
-const CustomInput = forwardRef<InputRef, InputProps>(  
+const CustomInput = forwardRef<InputRef, InputProps>(
   (
     {
       variant = 'default',
@@ -28,7 +28,6 @@ const CustomInput = forwardRef<InputRef, InputProps>(
     },
     ref
   ) => {
-
     const globalClasses = useMemo(
       () => getClasses({ variant, size, status, disabled, fullWidth }),
       [variant, size, status, disabled, fullWidth]
@@ -54,17 +53,21 @@ const CustomInput = forwardRef<InputRef, InputProps>(
 
     const finalSuffix = (
       <div className="flex items-center gap-1">
-        {loadingSuffix(loading)}
+        {loading && (
+          <Spin indicator={<LoadingOutlined style={{ fontSize: 12 }} spin />} />
+        )}
         {suffix}
       </div>
     );
 
     return (
       <div className="flex flex-col gap-1 w-full">
-        {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
+        {label && (
+          <label className="text-sm font-medium text-gray-700">{label}</label>
+        )}
         <AntdInput
           {...restProps}
-          ref={ref}  
+          ref={ref}
           className={inputClasses}
           disabled={disabled || loading}
           status={error ? 'error' : status === 'default' ? undefined : status}
