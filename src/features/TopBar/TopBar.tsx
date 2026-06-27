@@ -7,6 +7,8 @@ import { Search } from "./components/Search/Search";
 interface TopBarProps {
   selectedCategory: string | null;
   onCategoryChange: (category: string | null) => void;
+  search: string;           
+  onSearchChange: (value: string) => void; 
   totalProducts?: number;
   error?: Error | null;
 }
@@ -16,12 +18,17 @@ export default function TopBar({
   onCategoryChange,
   totalProducts,
   error,
+  search,
+  onSearchChange
 }: TopBarProps) {
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-6">
       <div className="flex flex-col gap-4 md:gap-6 mb-6">
         <div className="md:max-w-lg w-full">
-          <Search />
+          <Search 
+            value={search}
+            onChange={onSearchChange}
+          />
         </div>
         <div className="md:max-w-sm w-full">
           <Filter 
