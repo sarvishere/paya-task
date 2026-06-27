@@ -4,6 +4,7 @@ import Dropdown, { DropdownOption } from '@/shared/components/DropDown';
 import { useMemo } from 'react';
 import { useCategories } from './hooks/useCategories';
 
+
 interface CategoryFilterProps {
   onCategoryChange: (category: string | null) => void;
   selectedCategory: string | null;

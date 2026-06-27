@@ -15,7 +15,6 @@ export const useCategories = () => {
 
 export const useCategoriesWithStatus = () => {
   const { data, isLoading, error } = useCategories();
-  
   return {
     categories: data || [],
     isLoading,
